@@ -18,7 +18,6 @@
                 </v-list-item>
 
                 <v-divider></v-divider>
-
                 <v-subheader>Basic</v-subheader>
 
                 <v-list-item router to="/">
@@ -42,7 +41,6 @@
                 </v-list-item>
 
                 <v-divider></v-divider>
-
                 <v-subheader>Application</v-subheader>
 
                 <v-list-group prepend-icon="mdi-apps" no-action>
@@ -60,13 +58,14 @@
                 </v-list-group>
 
                 <v-divider></v-divider>
+                <v-subheader>Account </v-subheader>
 
-                <v-list-group prepend-icon="mdi-account-circle" value="true">
+                <v-list-group prepend-icon="mdi-account-circle">
                     <template v-slot:activator>
                         <v-list-item-title>Users</v-list-item-title>
                     </template>
 
-                    <v-list-group no-action sub-group value="true">
+                    <v-list-group no-action sub-group>
                         <template v-slot:activator>
                             <v-list-item-content>
                                 <v-list-item-title>Admin</v-list-item-title>
@@ -88,7 +87,7 @@
                         </v-list-item>
                     </v-list-group>
 
-                    <v-list-group no-action sub-group value="true">
+                    <v-list-group no-action sub-group>
                         <template v-slot:activator>
                             <v-list-item-content>
                                 <v-list-item-title>Action</v-list-item-title>
