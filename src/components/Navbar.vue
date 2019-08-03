@@ -1,10 +1,10 @@
 <template>
     <nav>
-        <v-navigation-drawer app :mini-variant.sync="mini" v-model="drawer" color="indigo" dark>
+        <v-navigation-drawer app absolute :mini-variant.sync="mini" v-model="drawer" color="indigo" dark>
             <v-list dense>
                 <v-list-item>
                     <v-list-item-avatar>
-                        <img src="@/assets/avatar/john.jpg">
+                        <img src="/avatar/john.jpg">
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -123,8 +123,6 @@
                         </v-list-item>
                     </v-list-group>
                 </v-list-group>
-
-
             </v-list>
         </v-navigation-drawer>
 
