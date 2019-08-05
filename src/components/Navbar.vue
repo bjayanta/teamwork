@@ -17,6 +17,10 @@
                     </v-btn>
                 </v-list-item>
 
+                <v-list-item>
+                    <Popup />
+                </v-list-item>
+
                 <v-divider></v-divider>
                 <v-subheader>Basic</v-subheader>
 
@@ -135,6 +139,21 @@
 
             <v-spacer></v-spacer>
 
+            <v-menu offset-y>
+                <template v-slot:activator="{ on }">
+                    <v-btn text color="grey" v-on="on">
+                        <v-icon left>mdi-chevron-down</v-icon>
+                        <span>Menu</span>
+                    </v-btn>
+                </template>
+
+                <v-list>
+                    <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
+                        <v-list-item-title>{{ link.text }}</v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
+
             <v-btn text class="grey--text">
                 <span>Sign Out</span>
                 <v-icon right>mdi-exit-to-app</v-icon>
@@ -144,11 +163,19 @@
 </template>
 
 <script>
+    import Popup from "./Popup";
+
     export default {
+        components: { Popup },
         data() {
             return {
                 drawer: true,
-                mini: false
+                mini: false,
+                links: [
+                    {icon: 'mdi-home', text: 'Dashboard', route: '/'},
+                    {icon: 'mdi-apps', text: 'Projects', route: '/project'},
+                    {icon: 'mdi-account', text: 'Team', route: '/team'},
+                ]
             }
         }
     };
