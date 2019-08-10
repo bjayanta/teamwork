@@ -37,6 +37,7 @@
 <script>
     /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
     import format from 'date-fns/format';
+    import db from '@/firebase';
 
     export default {
         data() {
@@ -56,6 +57,20 @@
             submit() {
                 if(this.$refs.form.validate()) {
                     console.log(this.title, this.content);
+
+                    // data
+                    const project = {
+                        title: this.title,
+                        content: this.content,
+                        due: format(this.date, 'Do MMM YYYY'),
+                        person: 'The US IT Solution',
+                        status: 'ongoing'
+                    };
+
+                    // insert
+                    db.collection('projects').add(project).then(() => {
+                        console.log("Added to DB");
+                    });
                 }
             }
         },
