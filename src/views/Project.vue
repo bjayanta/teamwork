@@ -21,18 +21,13 @@
 </template>
 
 <script>
+  import db from '@/firebase';
+
   export default {
     name: 'project',
     data() {
       return {
-        projects: [
-          {title: "Design a new website", person: "Rashadul Hasan Saddik", due: "1st Jan 2019", status: "ongoing", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae commodi consequatur doloribus ducimus esse explicabo fuga magni nulla officia possimus quam quos sapiente, tempore ut veniam? Aspernatur, numquam?"},
-          {title: "Code up the home page", person: "Imran Sajjad", due: "10th Jan 2019", status: "complete", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae commodi consequatur doloribus ducimus esse explicabo fuga magni nulla officia possimus quam quos sapiente, tempore ut veniam? Aspernatur, numquam?"},
-          {title: "Design a video thumbnails", person: "Maruf Hasan", due: "20th Dec 2019", status: "complete", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae commodi consequatur doloribus ducimus esse explicabo fuga magni nulla officia possimus quam quos sapiente, tempore ut veniam? Aspernatur, numquam?"},
-          {title: "Create a community forum", person: "Jayanta Biswas", due: "20th Oct 2019", status: "overdue", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae commodi consequatur doloribus ducimus esse explicabo fuga magni nulla officia possimus quam quos sapiente, tempore ut veniam? Aspernatur, numquam?"},
-          {title: "Make a analysis report", person: "Ziaur Rahman", due: "2nd Jun 2019", status: "pending", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae commodi consequatur doloribus ducimus esse explicabo fuga magni nulla officia possimus quam quos sapiente, tempore ut veniam? Aspernatur, numquam?"},
-          {title: "Design a new website", person: "Jayanta Biswas", due: "1st Jan 2019", status: "ongoing", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae commodi consequatur doloribus ducimus esse explicabo fuga magni nulla officia possimus quam quos sapiente, tempore ut veniam? Aspernatur, numquam?"}
-        ]
+        projects: []
       };
     },
     computed: {
@@ -41,6 +36,19 @@
           return project.person == "Jayanta Biswas"
         })
       }
+    },
+    created() {
+      db.collection('projects').onSnapshot(response => {
+        const changes = response.docChanges();
+        changes.forEach(change => {
+          if(change.type == 'added') {
+            this.projects.push({
+              ...change.doc.data(),
+              id: change.doc.id
+            })
+          }
+        })
+      })
     }
   }
 </script>

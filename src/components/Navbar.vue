@@ -18,7 +18,7 @@
                 </v-list-item>
 
                 <v-list-item>
-                    <Popup />
+                    <Popup @projectAdded="snackbar = true" />
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -130,6 +130,12 @@
             </v-list>
         </v-navigation-drawer>
 
+        <!-- snackbar -->
+        <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
+            <span>Awesome! You added a new project.</span>
+            <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
+        </v-snackbar>
+
         <v-app-bar app flat class="grey lighten-5">
             <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title class="text-uppercase grey--text">
@@ -175,7 +181,8 @@
                     {icon: 'mdi-home', text: 'Dashboard', route: '/'},
                     {icon: 'mdi-apps', text: 'Projects', route: '/project'},
                     {icon: 'mdi-account', text: 'Team', route: '/team'},
-                ]
+                ],
+                snackbar: false,
             }
         }
     };
